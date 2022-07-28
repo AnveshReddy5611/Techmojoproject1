@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import Product from './Product';
+import Productdetails from './Productdetails';
+import Cart from "./Cart";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +15,8 @@ root.render(
     <Routes>
       <Route path='/' element={<App />}/>
       <Route path='/Product' element={<Product />}/>
+      <Route path='/Productdetails' element={<Productdetails />}/>
+      <Route path='/cart' element={<Cart />}/>
     </Routes>
     
 
