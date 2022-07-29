@@ -1,14 +1,36 @@
 import React from 'react';
 import { useLocation } from "react-router-dom";
-
+import { useState } from 'react';
+import "./Cart.css"
 function Cart() {
     const location = useLocation();
     const { cartdetails } = location.state;
     console.log(cartdetails,"I am cart details")
+    console.log( cartdetails.length,"I am length")
+    // console.log( typeof {cartdetails},"I am length")
+    const [ramesh,setramesh]=useState(cartdetails)
+    const [originaldetails,setOriginaldetails]=useState(ramesh)
+    
+    
+
+
+    const totalCost=()=>{
+      return originaldetails.reduce((sum,{price})=>sum+price,0)
+    }
+    const removedata=(removeitem)=>{
+      setOriginaldetails(originaldetails.filter((item)=>item!==removeitem))
+      setramesh(originaldetails)
+    }
+    
     
   return (
-    <div>   <h1> I am Cart Get out of here</h1>
-        {cartdetails .map((ele, index) => (
+    <div> 
+      <div id="totalcost" style={{width:"18rem"}}>
+      <h4 > Total Items: {originaldetails.length}</h4>
+        <h4 > Total Cost: ${totalCost()}</h4>
+        <button   id="placeorder">place Order</button>
+        </div> 
+        {originaldetails .map((ele, index) => (
           <div
             key={index}
             class="card"
@@ -29,7 +51,9 @@ function Cart() {
               <p class="card-text">{ele.category}</p>
               <p class="card-text" style={{ height: "5rem" }}>
                 {ele.description}
-              </p></div></div>
+              </p><button  onClick={() => removedata(ele)}>remove</button></div>
+              
+              </div>
             ))
         }
     </div>

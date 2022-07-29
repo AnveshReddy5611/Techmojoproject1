@@ -12,6 +12,7 @@ import {
   CDropdownMenu,
   CDropdownItem,
 } from "@coreui/react";
+const cartdata=JSON.parse(localStorage.getItem("cart") || '[]')
 function Product() {
   // var brands=["OPPO","Apple","Samsung","Huwei","Ifei Home","Soft Cotton"];
   // var category=["laptops","smartphones","furniture","groceries","skincare","fragrances"];
@@ -19,20 +20,24 @@ function Product() {
   const productData = UserData.products;
   const [searchTerm, setSearchTerm] = useState("");
   const [mydata, setMydata] = useState(productData);
-  const[cart,setCart]=useState([]);
-  const [disable, setDisable] = React.useState(false);
+  const[cart,setCart]=useState(cartdata);
+  const [disable,setdisable]=useState(false)
 
-  const addToCart = (el,e) =>{
-    e.stopPropagation()
+  const addToCart = (el) =>{
+  
     console.log(cart,"I am cart initially")
     setCart((currentCart) => [...currentCart, el]);
     console.log(cart,"I am cart")
+    mydata.filter((ele)=> {return ele.id == el.id?setdisable(true):setdisable(false)})
+ 
+
+    
    
   };
-// useEffect((e)=>{
-//   addToCart()
-//   e.preventDefault()
-//   },[])
+useEffect(()=>{
+ localStorage.setItem("cart",JSON.stringify(cart));
+  // e.preventDefault()
+  },[cart])
 
   const handlePrice = () => {
     const numPrice = [...mydata].sort((a, b) => a.price - b.price);
@@ -71,7 +76,7 @@ function Product() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </form>
-        <Link to="/Cart"  state={{ cartdetails: cart }}>  <IoMdCart/></Link>
+        <Link to="/Cart"  state={{ cartdetails: cart}}> <IoMdCart/>{cart.length}</Link>
       
         <div class="btn-group">
           <button
@@ -137,10 +142,10 @@ function Product() {
                   Product Details
                 </button>
               </Link>
-              <button
+              <button key={index}
                 style={{ align: "end" }}
                 class="btn btn-primary" disabled={disable}
-                id="btn2" onClick={(e) => addToCart(ele,e)}
+                id="btn2" onClick={() => addToCart(ele)}
               >
                 Add to cart
               </button>
