@@ -23,17 +23,17 @@ function Product() {
   const[cart,setCart]=useState(cartdata);
   const [disable,setdisable]=useState(false)
 
-  const addToCart = (el) =>{
+  // const addToCart = (el) =>{
   
-    console.log(cart,"I am cart initially")
-    setCart((currentCart) => [...currentCart, el]);
-    console.log(cart,"I am cart")
-    mydata.filter((ele)=> {return ele.id == el.id?setdisable(true):setdisable(false)})
+  //   console.log(cart,"I am cart initially")
+  //   setCart((currentCart) => [...currentCart, el]);
+  //   console.log(cart,"I am cart")
+  //   // mydata.filter((ele)=> {return ele.id == el.id?setdisable(true):setdisable(false)})
  
 
     
    
-  };
+  // };
 useEffect(()=>{
  localStorage.setItem("cart",JSON.stringify(cart));
   // e.preventDefault()
@@ -142,13 +142,13 @@ useEffect(()=>{
                   Product Details
                 </button>
               </Link>
-              <button key={index}
+              {/* <button key={index}
                 style={{ align: "end" }}
                 class="btn btn-primary" disabled={disable}
                 id="btn2" onClick={() => addToCart(ele)}
               >
                 Add to cart
-              </button>
+              </button> */}
             </div>
           </div>
         ))}
