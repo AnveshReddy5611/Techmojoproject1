@@ -19,15 +19,14 @@ function Navbar() {
 
       <nav  class="navbar navbar-light bg-light">
   <form class="form-inline">
-    <p id="btn1" ><Link to="/Product"><p class="navbar-brand">
+<Link to="/Product"><p class="navbar-brand" id="btn1">
           Products
-        </p></Link></p>
-    <p  id="btn2"><Link to="/Cart"  state={{ cartdetails: cartf}}><p class="navbar-brand"> <IoMdCart/>{cartf.length} </p></Link>
-     </p>
+        </p></Link>
+    <Link to="/Cart"  state={{ cartdetails: cartf}}><p class="navbar-brand" id="btn2"> <IoMdCart/>{cartf.length} </p></Link>
+    
 
-      <p  id="btn3"><Link to="/"  > Logout</Link>
-      </p>
-  </form>
+      <Link to="/"  ><p class="navbar-brand" id="btn3"> Logout</p></Link>
+       </form>
 </nav>
 
     </div>
