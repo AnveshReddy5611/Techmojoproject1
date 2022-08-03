@@ -22,6 +22,7 @@ function Productdetails() {
     console.log(cart,"I am cart initially")
     setCart((currentCart) => [...currentCart, el]);
     console.log(cart,"I am cart")
+    window.location.reload();
    
  
 

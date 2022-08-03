@@ -4,10 +4,11 @@ import { useState , useEffect} from 'react';
 import Order from './Order';
 import "./Cart.css"
 function Cart() {
-    const location = useLocation();
-    const { cartdetails } = location.state;
-    console.log(cartdetails,"I am cart details")
-    console.log( cartdetails.length,"I am length")
+    // const location = useLocation();
+    // const { cartdetails } = location.state;
+    // console.log(cartdetails,"I am cart details")
+    // console.log( cartdetails.length,"I am length")
+    const cartdetails=JSON.parse(localStorage.getItem("cart") || '[]')
     // console.log( typeof {cartdetails},"I am length")
     // const [ramesh,setramesh]=useState(cartdetails)
     const [originaldetails,setOriginaldetails]=useState(cartdetails)
@@ -20,14 +21,16 @@ function Cart() {
     const totalCost=()=>{
       return originaldetails.reduce((sum,{price})=>sum+price,0)
     }
-    const removedata=(removeitem)=>{
+    const removedata=(removeitem,index)=>{
       setOriginaldetails(originaldetails.filter((item)=>item!==removeitem))
       // setramesh(originaldetails)
     }
       
-useEffect(()=>{
+useEffect((e)=>{
   localStorage.setItem("cart",JSON.stringify(originaldetails));
-   // e.preventDefault()
+  
+  //  e.preventDefault()
+  //  removedata();
    },[originaldetails])
     
     
@@ -36,6 +39,7 @@ useEffect(()=>{
       <div id="totalcost" style={{width:"18rem"}}>
       <h4 > Total Items: {originaldetails.length}</h4>
         <h4 > Total Cost: ${totalCost()}</h4>
+        
        <Link to="/Order" state={{finalcart:originaldetails,  cost:totalCost()}}> <button   id="placeorder" >place Order</button>
        </Link> </div> 
         {originaldetails .map((ele, index) => (

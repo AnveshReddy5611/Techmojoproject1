@@ -1,0 +1,17 @@
+#navbar{
+    background: green;
+}
+#btn1{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 35px;
+    text-decoration: none;
+}
+
+#btn2{
+    margin-top: 15px;
+    margin-bottom: 30px;
+    margin-left: 100px;
+    text-decoration: none;
+    
+}

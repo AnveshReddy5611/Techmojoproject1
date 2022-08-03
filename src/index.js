@@ -10,6 +10,7 @@ import Productdetails from './Productdetails';
 import Cart from "./Cart";
 import Order from './Order';
 import Placed from './Placed';
+import Navbar from './Navbar';
 
 
 
@@ -23,6 +24,7 @@ root.render(
       <Route path='/Cart' element={<Cart />}/>
       <Route path='/Order' element={<Order />}/>
       <Route path='/Placed' element={<Placed />}/>
+      <Route path='Navbar' element={<Navbar/>}/>
      
     </Routes>
     
