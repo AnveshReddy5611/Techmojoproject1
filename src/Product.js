@@ -3,8 +3,9 @@ import UserData from "./products.json";
 import "./product.css";
 import "./Productdetails";
 import { useNavigate, Link } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useSelector, useDispatch} from "react-redux";
+import { useState,useEffect } from "react";
+import axios from 'axios';
 import { IoMdCart } from "react-icons/io";
 import {
   CDropdown,
@@ -12,7 +13,8 @@ import {
   CDropdownMenu,
   CDropdownItem,
 } from "@coreui/react";
-const cartdata=JSON.parse(localStorage.getItem("cart") || '[]')
+import Navbar from "./Navbar";
+const cartdata = JSON.parse(localStorage.getItem("cart") || "[]");
 function Product() {
   // var brands=["OPPO","Apple","Samsung","Huwei","Ifei Home","Soft Cotton"];
   // var category=["laptops","smartphones","furniture","groceries","skincare","fragrances"];
@@ -20,24 +22,21 @@ function Product() {
   const productData = UserData.products;
   const [searchTerm, setSearchTerm] = useState("");
   const [mydata, setMydata] = useState(productData);
-  const[cart,setCart]=useState(cartdata);
-  const [disable,setdisable]=useState(false)
+  const [cart, setCart] = useState(cartdata);
+  const [disable, setdisable] = useState(false);
 
   // const addToCart = (el) =>{
-  
+
   //   console.log(cart,"I am cart initially")
   //   setCart((currentCart) => [...currentCart, el]);
   //   console.log(cart,"I am cart")
   //   // mydata.filter((ele)=> {return ele.id == el.id?setdisable(true):setdisable(false)})
- 
 
-    
-   
   // };
-useEffect(()=>{
- localStorage.setItem("cart",JSON.stringify(cart));
-  // e.preventDefault()
-  },[cart])
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    // e.preventDefault()
+  }, [cart]);
 
   const handlePrice = () => {
     const numPrice = [...mydata].sort((a, b) => a.price - b.price);
@@ -51,24 +50,14 @@ useEffect(()=>{
 
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        {/* <a class="navbar-brand" href="#">Products</a> */}
-        <Link to="/Product"><p class="navbar-brand">
-          Products
-        </p></Link>
-        {/* <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button> */}
-
-        <CDropdown>
-          <CDropdownToggle color="secondary">sorting</CDropdownToggle>
-          <CDropdownMenu>
-            <CDropdownItem onClick={handlePrice}>Price</CDropdownItem>
-            <CDropdownItem onClick={handleRating}>Rating</CDropdownItem>
-          </CDropdownMenu>
-        </CDropdown>
+      <div>
+        <Navbar />
+      </div>
+      <br />
+      <div>
         <form class="form-inline my-2 my-lg-0">
           <input
+            id="search"
             class="form-control mr-sm-2"
             type="search"
             placeholder="Search"
@@ -76,90 +65,79 @@ useEffect(()=>{
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </form>
-        <Link to="/Cart"  state={{ cartdetails: cart}}> <IoMdCart/>{cart.length}</Link>
-      
-        <div class="btn-group">
-          <button
-            class="btn btn-secondary btn-sm dropdown-toggle"
-            type="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Small button
-          </button>
+        <br />
+        <CDropdown id="dropdown">
+          <CDropdownToggle color="secondary">sorting</CDropdownToggle>
+          <CDropdownMenu>
+            <CDropdownItem onClick={handlePrice}>Price</CDropdownItem>
+            <CDropdownItem onClick={handleRating}>Rating</CDropdownItem>
+          </CDropdownMenu>
+        </CDropdown>
+      </div>
 
-          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            {/* <button class="dropdown-item" type="button" onClick={sortingPrice()}>price</button>
-            <button class="dropdown-item" type="button" onClick={sortingRating()}>Rating</button> */}
-            {/* <button class="dropdown-item" type="button">Something else here</button> */}
-          </div>
-        </div>
-      </nav>
-      
-{/* <ul>
+      {/* <ul>
   <li><a class="active" href="#home">Home</a></li>
   <li><a href="#news">News</a></li>
   <li><a href="#contact">Contact</a></li>
   <li><a href="#about">About</a></li>
 </ul> */}
 
-      <p></p><div id="cardd">
+      <p></p>
+      <div id="cardd">
+        {/* //////////// */}
+        {mydata
+          .filter((val, key) => {
+            if (searchTerm === "") {
+              return val.title;
+            } else if (
+              val.title.toLowerCase().includes(searchTerm.toLowerCase())
+            ) {
+              return val.title;
+            }
+          })
 
-      {/* //////////// */}
-      {mydata
-        .filter((val, key) => {
-          if (searchTerm === "") {
-            return val.title;
-          } else if (
-            val.title.toLowerCase().includes(searchTerm.toLowerCase())
-          ) {
-            return val.title;
-          }
-        })
-
-        .map((ele, index) => (
-          
-          <div
-            key={index}
-            class="card"
-            id="cardbody"
-            style={{ width: "19.5rem", display: "inline-grid" }}
-          >
-            <img
-              class="card-img-top"
-              style={{ height: "18rem" }}
-              src={ele.images[0]}
-              alt="Card image cap"
-            />
-            <div class="card-body">
-              <h5 class="card-title" style={{ height: "3rem" }}>
-                {ele.title}
-              </h5>
-              <p class="card-text">$&nbsp;{ele.price}</p>
-              <p class="card-text">{ele.category}</p>
-              <p class="card-text" style={{ height: "5rem" }}>
-                {ele.description}
-              </p>
-              <Link
-                to="/Productdetails"
-                style={{ alignContent: "center" }}
-                state={{ details: ele }}
-              >
-                <button class="btn btn-primary" id="btn1">
-                  Product Details
-                </button>
-              </Link>
-              {/* <button key={index}
+          .map((ele, index) => (
+            <div
+              key={index}
+              class="card"
+              id="cardbody"
+              style={{ width: "19.5rem", display: "inline-grid" }}
+            >
+              <img
+                class="card-img-top"
+                style={{ height: "18rem" }}
+                src={ele.images[0]}
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <h5 class="card-title" style={{ height: "3rem" }}>
+                  {ele.title}
+                </h5>
+                <p class="card-text">$&nbsp;{ele.price}</p>
+                <p class="card-text">{ele.category}</p>
+                <p class="card-text" style={{ height: "5rem" }}>
+                  {ele.description}
+                </p>
+                <Link
+                  to="/Productdetails"
+                  style={{ alignContent: "center" }}
+                  state={{ details: ele }}
+                >
+                  <button class="btn btn-primary" id="btn1">
+                    Product Details
+                  </button>
+                </Link>
+                {/* <button key={index}
                 style={{ align: "end" }}
                 class="btn btn-primary" disabled={disable}
                 id="btn2" onClick={() => addToCart(ele)}
               >
                 Add to cart
               </button> */}
+              </div>
             </div>
-          </div>
-        ))}</div>
+          ))}
+      </div>
       {/* ////////////
       <h1>FILTERED DATA</h1>
       {/* <button onClick={sortingPrice()}></button> */}

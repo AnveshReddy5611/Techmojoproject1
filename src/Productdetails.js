@@ -2,46 +2,40 @@ import React from "react";
 import UserData from "./products.json";
 import { useLocation } from "react-router-dom";
 import "./Productdetails.css";
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { IoMdCart } from "react-icons/io";
-
+import Navbar from "./Navbar";
 
 function Productdetails() {
-
-
   const location = useLocation();
   const { details } = location.state;
-  
-  const [disable,setdisable]=useState(false)
-  const cartdata=JSON.parse(localStorage.getItem("cart") || '[]')
-  const[cart,setCart]=useState(cartdata);
 
-  const addToCart = (el) =>{
-  
-    console.log(cart,"I am cart initially")
+  const [disable, setdisable] = useState(false);
+  const cartdata = JSON.parse(localStorage.getItem("cart") || "[]");
+  const [cart, setCart] = useState(cartdata);
+
+  const addToCart = (el) => {
+    console.log(cart, "I am cart initially");
     setCart((currentCart) => [...currentCart, el]);
-    console.log(cart,"I am cart")
+    console.log(cart, "I am cart");
     window.location.reload();
-   
- 
-
-    
-   
   };
-  
-useEffect(()=>{
-  localStorage.setItem("cart",JSON.stringify(cart));
-   // e.preventDefault()
-   },[cart])
-  
 
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    // e.preventDefault()
+  }, [cart]);
 
   return (
-    <div >
-      
-      <Link to="/Cart"  state={{ cartdetails: cart}}> <IoMdCart/>{cart.length}</Link>
-      <div class="card" id="body" style={{ width: "19rem", alignItems: "center" }}>
+    <div>
+      <Navbar />
+
+      <div
+        class="card"
+        id="body"
+        style={{ width: "19rem", alignItems: "center" }}
+      >
         {/* <img
               class="card-img-top"
               style={{ height: "18rem",width:"17rem" }}
@@ -113,13 +107,15 @@ useEffect(()=>{
           <p class="card-text" style={{ height: "5rem" }}>
             {details.description}
           </p>
-          <button 
-                style={{ align: "end" }}
-                class="btn btn-primary" disabled={disable}
-                id="btn2" onClick={() => addToCart(details)}
-              >
-                Add to cart
-              </button>
+          <button
+            style={{ align: "end" }}
+            class="btn btn-primary"
+            disabled={disable}
+            id="btn2"
+            onClick={() => addToCart(details)}
+          >
+            Add to cart
+          </button>
         </div>
       </div>
     </div>
