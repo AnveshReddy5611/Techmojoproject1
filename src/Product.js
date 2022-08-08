@@ -127,122 +127,12 @@ function Product() {
                     Product Details
                   </button>
                 </Link>
-                {/* <button key={index}
-                style={{ align: "end" }}
-                class="btn btn-primary" disabled={disable}
-                id="btn2" onClick={() => addToCart(ele)}
-              >
-                Add to cart
-              </button> */}
+              
               </div>
             </div>
           ))}
       </div>
-      {/* ////////////
-      <h1>FILTERED DATA</h1>
-      {/* <button onClick={sortingPrice()}></button> */}
-
-      {/* <input
-        type="checkbox"
-        value=""
-        id="flexCheckDefault"
-        onClick={() => filterResult("smartphones")}
-      />
-      <label className="form-check-label" htmlFor="flexCheckDefault">
-        Smartphones
-      </label><br></br> */}
-
-      {/* <input
-        type="checkbox"
-        value=""
-        id="flexCheckDefault"
-        onClick={() => filterResult("smartphones")}
-      />
-      <label className="form-check-label" htmlFor="flexCheckDefault">
-        Smartphones
-      </label><br></br>
-
-      <input
-        type="checkbox"
-        value=""
-        id="flexCheckDefault"
-        onClick={() => filterResult("laptops")}
-      />
-      <label className="form-check-label" htmlFor="flexCheckDefault">
-       laptops
-      </label> */}
-
-      {/* 
-      {mydata.map((value, index) => {
-        return (
-          <div key={index}>
-            <div
-              class="card"
-              style={{ width: "19.5rem", display: "inline-grid" }}
-            >
-              <img
-                class="card-img-top"
-                style={{ height: "18rem" }}
-                src={value.images[0]}
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <h5 class="card-title" style={{ height: "3rem" }}>
-                  {value.title}
-                </h5>
-                <p class="card-text">$&nbsp;{value.price}</p>
-                <p class="card-text">{value.category}</p>
-                <p class="card-text">Rating :  {value.rating}</p>
-                <p class="card-text" style={{ height: "5rem" }}>
-                  {value.description}
-                </p>
-                <a href="#" class="btn btn-primary">
-                  Go somewhere
-                </a>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-
-
-
-
-
-<h2>justwait</h2>
-
-{demon.map((value, index) => {
-        return (
-          <div key={index}>
-            <div
-              class="card"
-              style={{ width: "19.5rem", display: "inline-grid" }}
-            >
-              <img
-                class="card-img-top"
-                style={{ height: "18rem" }}
-                src={value.images[0]}
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <h5 class="card-title" style={{ height: "3rem" }}>
-                  {value.title}
-                </h5>
-                <p class="card-text">$&nbsp;{value.price}</p>
-                <p class="card-text">{value.category}</p>
-                <p class="card-text">Rating :  {value.rating}</p>
-                <p class="card-text" style={{ height: "5rem" }}>
-                  {value.description}
-                </p>
-                <a href="#" class="btn btn-primary">
-                  Go somewhere
-                </a>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-        */}
+     
     </div>
   );
 }
